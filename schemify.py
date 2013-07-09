@@ -72,3 +72,9 @@ class opt(object):
     def __init__(self, type, default=_no_default):
         self.type = type
         self.default = default
+
+    def __str__(self):
+        return '%s(%s)' % (self.__class__.__name__, self.type)
+
+    __repr__ = __str__
+    __unicode__ = __str__
