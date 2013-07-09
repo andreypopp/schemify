@@ -1,7 +1,7 @@
 # schemify — simple schema validation for Python
 
-Compose schemas from builtins — int, str, bool, list, dict to validate and
-convert structure to desired datatypes:
+Compose schemas from builtins — `int`, `str`, `bool`, `list`, `dict` to validate
+and convert structures to desired datatypes:
 
     >>> from schemify import validate
 
@@ -41,3 +41,22 @@ Use `anything` validator for suppressing validation at some point:
     {'a': {}}
     >>> validate(schema, {'a': 1})
     {'a': 1}
+
+To provide new validator just use a function which converts value to a desired
+datatype and raises `ValidationError` on invalid input:
+
+    >>> from schemify import ValidationError
+    >>> import re
+    >>> alphanum_re = re.compile('^[a-zA-Z]+$')
+    >>> def alphanum(v):
+    ...   if not alphanum_re.match(v):
+    ...     raise ValidationError('should contain only alphanum chars')
+    ...   return v
+
+and use it:
+
+    >>> schema = {'a': alphanum}
+    >>> data = {'a': 'somestring'}
+
+    >>> validate(schema, data)
+    {'a': 'somestring'}
