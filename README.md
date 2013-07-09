@@ -1,4 +1,18 @@
-# schemify — simple schema validation for Python
+# schemify
+
+Simple schema validation for Python.
+
+## Installation
+
+Via easy\_install:
+
+    % easy_install schemify
+
+or via pip:
+
+    % pip install schemify
+
+## Usage
 
 Compose schemas from builtins — `int`, `str`, `bool`, `list`, `dict` to validate
 and convert structures to desired datatypes:
